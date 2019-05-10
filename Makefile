@@ -11,9 +11,18 @@ test-up:
 
 # development
 # got into images
-# docker exec -ti django-ecommerce-api_app_1 /bin/sh
+## docker exec -ti django-ecommerce-api_app_1 /bin/sh
 build:
 	docker-compose build --force-rm
+
+up:
+	docker-compose up -d
+
+cmd: up
+	docker-compose exec app python manage.py $(CMD)
+
+create: up
+	docker-compose exec app python manage.py startapp $(APP)
 
 sync: up
 	docker-compose exec app python manage.py makemigrations
@@ -25,11 +34,11 @@ superuser: up
 collectstatic: up
 	docker-compose exec app python manage.py collectstatic
 
-up:
-	docker-compose up -d
+stop:
+	docker-compose stop
 
-down:
-	docker-compose down
+reset:
+	docker-compose down -v
 
 logs:
 	docker-compose logs --follow
@@ -57,8 +66,11 @@ psql-prod:
 up-prod:
 	docker-compose -f docker-compose.prod.yml up -d
 
-down-prod:
-	docker-compose -f docker-compose.prod.yml down
+stop-prod:
+	docker-compose -f docker-compose.prod.yml stop
+
+reset-prod:
+	docker-compose -f docker-compose.prod.yml down -v
 
 logs-prod:
 	docker-compose -f docker-compose.prod.yml logs --follow
