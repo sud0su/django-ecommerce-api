@@ -102,3 +102,9 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# added by razinal
+requirements.txt
+Pipfile.lock
+.env.db
+/frontend/staticfiles

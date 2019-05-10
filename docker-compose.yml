@@ -1,0 +1,34 @@
+version: "3.7"
+
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app/
+    command: python manage.py runserver 0.0.0.0:8000
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=sud0su
+      - SQL_ENGINE=django.db.backends.postgresql
+      - SQL_DATABASE=django_ecommerce
+      - SQL_USER=djangoecommerce
+      - SQL_PASSWORD=djangoecommerce
+      - SQL_HOST=db
+      - SQL_PORT=5432
+      - DATABASE=postgres
+    depends_on:
+      - db
+  db:
+    image: postgres:11.2-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=djangoecommerce
+      - POSTGRES_PASSWORD=djangoecommerce
+      - POSTGRES_DB=django_ecommerce
+
+volumes:
+  postgres_data:
