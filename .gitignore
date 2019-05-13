@@ -108,3 +108,4 @@ requirements.txt
 Pipfile.lock
 .env.prod
 /frontend/staticfiles
+.vscode/
