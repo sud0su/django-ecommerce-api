@@ -106,5 +106,5 @@ venv.bak/
 # added by razinal
 requirements.txt
 Pipfile.lock
-.env.db
+.env.prod
 /frontend/staticfiles

@@ -18,6 +18,7 @@ psycopg2 = "==2.7.3.2"
 Django = "==2.1.7"
 ipython_genutils = "==0.2.0"
 gunicorn = "==19.9.0"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.7"

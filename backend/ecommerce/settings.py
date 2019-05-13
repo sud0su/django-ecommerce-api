@@ -120,6 +120,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # added by razinal
+import dotenv
+env_path = os.path.abspath(os.path.join(BASE_DIR, '..', '.env'))
+dotenv.load_dotenv(env_path, override=True)
+
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = int(os.environ.get('DEBUG', default=0))
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
@@ -135,6 +139,7 @@ DATABASES = {
     }
 }
 
+# STATIC_URL = '../frontend/staticfiles'
 STATIC_ROOT = os.path.join(BASE_DIR, '../frontend/staticfiles')
 MEDIA_URL = '../frontend/mediafiles/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '../frontend/mediafiles')
