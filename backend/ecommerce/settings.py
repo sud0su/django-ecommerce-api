@@ -117,12 +117,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
+
+STATIC_ROOT = ''
 
 # added by razinal
-import dotenv
-env_path = os.path.abspath(os.path.join(BASE_DIR, '..', '.env'))
-dotenv.load_dotenv(env_path, override=True)
+# E-Commerce settings
+
+DOCKER = False
+if DOCKER:
+    pass
+else:
+    import dotenv
+    env_path = os.path.join(os.path.dirname(BASE_DIR), '.env')
+    dotenv.load_dotenv(env_path, override=True)
+
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = int(os.environ.get('DEBUG', default=0))
@@ -139,7 +148,33 @@ DATABASES = {
     }
 }
 
-# STATIC_URL = '../frontend/staticfiles'
-STATIC_ROOT = os.path.join(BASE_DIR, '../frontend/staticfiles')
-MEDIA_URL = '../frontend/mediafiles/'
-MEDIA_ROOT = os.path.join(BASE_DIR, '../frontend/mediafiles')
+ECOMMERCEAPI_APPS = [
+    #utils
+    'django.contrib.sites',
+    'nested_admin',
+    'webpack_loader',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'admin_reorder',
+    'mptt',
+    # auth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'rest_auth.registration',
+    # Apps
+    'user'
+]
+SITE_ID = 1
+INSTALLED_APPS += ECOMMERCEAPI_APPS
+
+# STATIC & MEDIA SETTING
+STATIC_URL = os.getenv('STATIC_URL', '/static_cdn/')
+_DEFAULT_STATICFILES_DIR = [
+    os.path.join(os.path.dirname(BASE_DIR), 'frontend/assets'),
+]
+STATICFILES_DIRS = os.getenv('STATICFILES_DIRS', _DEFAULT_STATICFILES_DIR)
+STATIC_ROOT = os.getenv('STATIC_ROOT', os.path.join(os.path.dirname(BASE_DIR), 'frontend/staticfiles'))
+
+MEDIA_URL = os.getenv('MEDIA_URL', '/media_cdn/')
+MEDIA_ROOT = os.getenv('MEDIA_ROOT', os.path.join(os.path.dirname(BASE_DIR), 'frontend/mediafiles'))

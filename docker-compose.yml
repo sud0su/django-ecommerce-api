@@ -29,6 +29,7 @@ services:
       - POSTGRES_USER=djangoecommerce
       - POSTGRES_PASSWORD=djangoecommerce
       - POSTGRES_DB=django_ecommerce
+    restart: always
 
 volumes:
   postgres_data:

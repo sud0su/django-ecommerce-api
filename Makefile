@@ -53,11 +53,11 @@ psql:
 build-prod:
 	docker-compose -f docker-compose.prod.yml build --force-rm
 
-sync-prod: up-prod
+sync-prod:
 	docker-compose -f docker-compose.prod.yml exec app python manage.py makemigrations
 	docker-compose -f docker-compose.prod.yml exec app python manage.py migrate --noinput
 
-superuser-prod: up-prod
+superuser-prod:
 	docker-compose -f docker-compose.prod.yml exec app python manage.py createsuperuser
 
 psql-prod:
