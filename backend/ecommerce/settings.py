@@ -123,7 +123,6 @@ STATIC_ROOT = ''
 
 # added by razinal
 # E-Commerce settings
-
 DOCKER = False
 if DOCKER:
     pass
@@ -163,10 +162,24 @@ ECOMMERCEAPI_APPS = [
     'allauth.socialaccount',
     'rest_auth.registration',
     # Apps
-    'user'
+    'location',
+    'user.apps.UserConfig',
+    'reference',
+    'attribute',
+    'product',
+    'order',
+    'cart',
+    'setting',
 ]
 SITE_ID = 1
 INSTALLED_APPS += ECOMMERCEAPI_APPS
+
+AUTH_USER_MODEL = os.getenv('AUTH_USER_MODEL', 'user.Profile')
+# Django allauth (account registration email flow)
+# http://django-allauth.readthedocs.io/en/latest/configuration.html
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
 
 # STATIC & MEDIA SETTING
 STATIC_URL = os.getenv('STATIC_URL', '/static_cdn/')
