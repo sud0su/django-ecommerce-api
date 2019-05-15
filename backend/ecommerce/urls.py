@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, re_path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -24,6 +24,12 @@ admin.site.index_title = "Menu List"
 admin.site.site_title = "E-Commerce site admin"
 
 urlpatterns = [
+    # rest-framework
+    path('auth/', include('rest_auth.urls')),
+    path('registration/', include('rest_auth.registration.urls')),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # apps-api
+    re_path('api/(?P<version>(v1|v2))/reference/', include('reference.urls')),
     # admin site,
     path('admin/', admin.site.urls),
     path('nested_admin/', include('nested_admin.urls')),

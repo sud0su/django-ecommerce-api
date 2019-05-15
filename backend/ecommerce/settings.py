@@ -191,3 +191,29 @@ STATIC_ROOT = os.getenv('STATIC_ROOT', os.path.join(os.path.dirname(BASE_DIR), '
 
 MEDIA_URL = os.getenv('MEDIA_URL', '/media_cdn/')
 MEDIA_ROOT = os.getenv('MEDIA_ROOT', os.path.join(os.path.dirname(BASE_DIR), 'frontend/mediafiles'))
+
+
+# Webpack loader settings
+# WEBPACK_LOADER = {
+#     'DEFAULT':{
+#         'CACHE': not DEBUG,
+#         'BUNDLE_DIR_NAME': '',
+#         'STATS_FILE': os.path.join(BASE_DIR, 'frontend/webpack-stats.json'),
+#         'POLL_INTERVAL': 0.1,
+#         'TIMEOUT': None,
+#         'IGNORE': ['.+\.hot-update.js','.+\.map']
+#     }
+# }
+
+REST_SESSION_LOGIN = True
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+SITE_ID = 1
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+}
