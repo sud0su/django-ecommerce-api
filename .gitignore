@@ -108,6 +108,8 @@ requirements.txt
 Pipfile.lock
 .env.docker
 .env.prod
-/frontend/staticfiles
-/frontend/mediafiles
+/frontend/cdn/staticfiles/
+/frontend/cdn/mediafiles/
+frontend/djangotemplates/assets/node_modules/
+frontend/djangotemplates/assets/package-lock.json
 .vscode/

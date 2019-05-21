@@ -121,8 +121,13 @@ USE_TZ = True
 
 STATIC_ROOT = ''
 
-# added by razinal
-# E-Commerce settings
+"""
+##########################################
+added by razinal
+E-Commerce settings
+##########################################
+"""
+
 DOCKER = False
 if DOCKER:
     pass
@@ -184,14 +189,34 @@ ACCOUNT_EMAIL_VERIFICATION = 'optional'
 # STATIC & MEDIA SETTING
 STATIC_URL = os.getenv('STATIC_URL', '/static_cdn/')
 _DEFAULT_STATICFILES_DIR = [
-    os.path.join(os.path.dirname(BASE_DIR), 'frontend/assets'),
+    os.path.join(os.path.dirname(BASE_DIR), 'frontend/djangotemplates/assets'),
 ]
 STATICFILES_DIRS = os.getenv('STATICFILES_DIRS', _DEFAULT_STATICFILES_DIR)
-STATIC_ROOT = os.getenv('STATIC_ROOT', os.path.join(os.path.dirname(BASE_DIR), 'frontend/staticfiles'))
+STATIC_ROOT = os.getenv('STATIC_ROOT', os.path.join(os.path.dirname(BASE_DIR), 'frontend/cdn/staticfiles'))
 
 MEDIA_URL = os.getenv('MEDIA_URL', '/media_cdn/')
-MEDIA_ROOT = os.getenv('MEDIA_ROOT', os.path.join(os.path.dirname(BASE_DIR), 'frontend/mediafiles'))
+MEDIA_ROOT = os.getenv('MEDIA_ROOT', os.path.join(os.path.dirname(BASE_DIR), 'frontend/cdn/mediafiles'))
 
+# DJANGO TEMPLATES
+SITE_NAME = 'E-Commerce'
+TEMP_DIR = os.path.join(os.path.dirname(BASE_DIR), 'frontend/djangotemplates')
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [TEMP_DIR],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                # added by razinal
+                'ecommerce.context_processors.resource_urls',
+            ],
+        },
+    },
+]
 
 # Webpack loader settings
 # WEBPACK_LOADER = {

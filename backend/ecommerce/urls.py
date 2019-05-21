@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, re_path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import *
 
 # Admin site config
 admin.site.site_header = "Login Title"
@@ -24,6 +25,8 @@ admin.site.index_title = "Menu List"
 admin.site.site_title = "E-Commerce site admin"
 
 urlpatterns = [
+    #djangotemplate_url
+    path('', Home, name="home"),
     # rest-framework
     path('auth/', include('rest_auth.urls')),
     path('registration/', include('rest_auth.registration.urls')),
