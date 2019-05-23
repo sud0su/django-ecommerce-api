@@ -49,6 +49,9 @@ shell:
 psql:
 	docker-compose exec db psql --username=djangoecommerce --dbname=django_ecommerce
 
+sass:
+	sass --watch frontend/djangotemplates/assets/scss/main.scss frontend/djangotemplates/assets/css/main.css
+
 # production
 build-prod:
 	docker-compose -f docker-compose.prod.yml build --force-rm

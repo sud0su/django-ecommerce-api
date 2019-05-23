@@ -25,14 +25,15 @@ admin.site.index_title = "Menu List"
 admin.site.site_title = "E-Commerce site admin"
 
 urlpatterns = [
-    #djangotemplate_url
-    path('', Home, name="home"),
+    #django_url
+    path('', Home.as_view(), name="home"),
+    path('reference/', include('reference.urls')),
     # rest-framework
     path('auth/', include('rest_auth.urls')),
     path('registration/', include('rest_auth.registration.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # apps-api
-    re_path('api/(?P<version>(v1|v2))/reference/', include('reference.urls')),
+    re_path('api/(?P<version>(v1|v2))/reference/', include('reference.apiurls')),
     # admin site,
     path('admin/', admin.site.urls),
     path('nested_admin/', include('nested_admin.urls')),

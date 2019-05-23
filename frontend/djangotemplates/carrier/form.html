@@ -1,0 +1,53 @@
+{% extends "_base.html" %}
+{% load  static %}
+{% block content %}
+<h1>Carrier Form</h1>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% comment %} {{ form.as_p }} {% endcomment %}
+    {% for field in form %}
+    <div class="form-group">
+        {% if field.html_name == 'logo'%}
+            <div class="file-upload">
+                <div class="file-edit">
+                    {{ field }}
+                    <label for="imageUpload"></label>
+                </div>
+                <div class="file-preview">
+                    <div id="imagePreview" style="background-image: url({% static 'img/preview.png' %});"></div>
+                </div>
+            </div>
+
+        {% else %}
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">{{ field.label }}</label>
+                <div class="col-sm-10">
+                    {{ field }}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    <input class="btn btn-outline-primary" type="submit" value='Save' />
+</form>
+{% endblock content %}
+
+{% block extra_script %}
+<script>
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+            $('#imagePreview').hide();
+            $('#imagePreview').fadeIn(650);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+$("#imageUpload").change(function() {
+    readURL(this);
+});
+</script>
+{% endblock extra_script %}

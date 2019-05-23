@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import Http404
-# from .models import Question
+from django.views.generic import TemplateView
+
 # Create your views here.
-def Home(request):
-    # data = Question.objects.all()
+class Home(TemplateView):
+    title = "Dashboard"
     template = "dashboard/index.html"
-    title = "Dashboard Info"
-    context = {"title": title, "data": "tess"}
-    return render(request, template, context)
+
+    def get(self, request, *args, **kwargs):
+        context = {"title": self.title, "data": "tess"}
+        return render(request, self.template, context)

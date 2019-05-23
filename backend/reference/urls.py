@@ -1,8 +1,10 @@
 from django.urls import path
 from .views import *
 
+app_name = 'references'
 urlpatterns = [
-    path('carrier/list/', CarrierList.as_view(), name="carriers-all"),
-    path('carrier/create/', CarrierCreate.as_view()),
-    path('carrier/update/<int:pk>/', CarrierRetrieveUpdate.as_view()),
+    path('carrier/data/', CarrierView.as_view(), name="carrier-list"),
+    path('carrier/create/', CarrierCreateView.as_view(), name="carrier-create"),
+    # path('carrier/update/<int:id>', CarrierCreateView.as_view(), name="carrier-create"),
+    # path('carrier/delete/<int:id>', CarrierCreateView.as_view(), name="carrier-create"),
 ]

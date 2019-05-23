@@ -3,7 +3,7 @@ from decimal import Decimal
 from django.utils.translation import gettext as _
 from attribute.models import AttributeSet, Attribute
 from reference.models import Tax, Category
-
+from ecommerce.path_rename import path_and_rename
 class ProductGroup(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -26,7 +26,7 @@ class Product(models.Model):
         db_table = 'products'
 
 class ProductImage(models.Model):
-    name = models.ImageField(_("Name"), upload_to='products/', null=True, blank=True)
+    name = models.ImageField(_("Name"), upload_to=path_and_rename('products/'), null=True, blank=True)
     # name = models.CharField(_("Name"), max_length=100, blank=True, null=True)
     order = models.IntegerField(_("Order"))
     product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)

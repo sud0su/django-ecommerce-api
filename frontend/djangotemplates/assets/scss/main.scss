@@ -1,19 +1,91 @@
 $theme-colors: (
-  "primary": #0074d9,
-  "danger": #ff4136
+  "primary": #563d7c,
+  "danger": #ad0f06
 );
 
-$border-radius: 10rem;
+$bd-purple: #563d7c;
+$bd-purple-light: #cbbde2;
+$bd-purple-bright: #7952b3;
 
-@import "../node_modules/bootstrap/scss/functions";
-@import "../node_modules/bootstrap/scss/variables";
-@import "../node_modules/bootstrap/scss/mixins";
+// $border-radius: 1rem;
 
-@import "../node_modules/bootstrap/scss/grid";
-@import "../node_modules/bootstrap/scss/navbar";
-@import "../node_modules/bootstrap/scss/utilities";
-@import "../node_modules/bootstrap/scss/transitions";
-@import "../node_modules/bootstrap/scss/reboot";
-@import "../node_modules/bootstrap/scss/type";
-@import "../node_modules/bootstrap/scss/buttons";
-@import "../node_modules/bootstrap/scss/forms";
+$component-active-bg:         $bd-purple !default;
+$input-btn-focus-width:       .2rem !default;
+$input-btn-focus-color:       rgba($component-active-bg, .25) !default;
+$input-btn-focus-box-shadow:  0 0 0 $input-btn-focus-width $input-btn-focus-color !default;
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+@import "_navbar";
+@import "_algolia";
+@import "_fileupload";
+@import "_sidebar";
+@import "_content";
+
+// A map of breakpoints.
+// $breakpoints: (
+//   xs: 576px,
+//   sm: 768px,
+//   md: 992px,
+//   lg: 1200px
+// );
+
+.bd-title {
+  margin-top: 1rem;
+  margin-bottom: .5rem;
+  font-weight: 300;
+  @include font-size(3rem);
+}
+
+.bd-lead {
+  @include font-size(1.5rem);
+  font-weight: 300;
+
+  @include media-breakpoint-up(lg) {
+    max-width: 80%;
+  }
+}
+
+.bd-text-purple { color: $bd-purple; }
+.bd-text-purple-bright { color: $bd-purple-bright; }
+
+.card-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+
+  li {
+    display: inline-block;
+    margin-right: 1rem;
+    margin-bottom: 1rem !important;
+
+    .card {
+      max-width: 13rem;
+    }
+
+    img {
+      object-fit: cover;
+
+      @include media-breakpoint-down(xs) {
+        height: 19vw;
+      }
+      @include media-breakpoint-up(sm) {
+        height: 16vw;
+      }
+      @include media-breakpoint-up(md) {
+        height: 11vw;
+      }
+      @include media-breakpoint-up(lg) {
+        height: 11vw;
+      }
+    }
+  }
+}
+
+.card-body {
+  padding: 0.5rem 1em !important;
+}
+.card-title {
+  margin-bottom: 0 !important;
+}

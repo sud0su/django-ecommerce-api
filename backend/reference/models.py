@@ -2,6 +2,8 @@ from django.db import models
 from django.utils.translation import gettext as _
 from mptt.models import MPTTModel, TreeForeignKey
 from decimal import Decimal
+from django.urls import reverse
+from ecommerce.path_rename import path_and_rename
 # Create your models here.
 
 class Tax(models.Model):
@@ -49,7 +51,7 @@ class Carrier(models.Model):
     name = models.CharField(_("Name"), max_length=100, blank=True, null=True)
     price = models.DecimalField(_("Price"), max_digits=13, decimal_places=2, blank=True, null=True)
     delivery_text = models.CharField(_("Delivery Text"), max_length=255, blank=True, null=True)
-    logo = models.ImageField(upload_to='carriers/logo', null=True, blank=True)
+    logo = models.ImageField(upload_to=path_and_rename('carriers/logo'), null=True, blank=True)
 
     def __str__(self):
         return self.name
